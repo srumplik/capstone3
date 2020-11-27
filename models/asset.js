@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema(
+const assetSchema = new mongoose.Schema(
 	{
 		assetID: {
 			type: String,
@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema(
 		model: {
 			type: String,
 		},
+		department: {
+			type: String,
+		},
 		serialNumber: {
 			type: String,
 		},
@@ -23,11 +26,20 @@ const userSchema = new mongoose.Schema(
 		},
 		rentedBy: {
 			type: Array,
-		}
+		},
+		initialCost: {
+			type: Number,
+		},
+		rentalPrice: {
+			type: Number,
+		},
+		timesRented: {
+			type: Number,
+		},
 	},
 );
 
-const Asset = mongoose.model('Asset', userSchema);
+const Asset = mongoose.model('Asset', assetSchema);
 
 // export default User;
 module.exports.Asset = Asset;

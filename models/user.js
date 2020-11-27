@@ -1,3 +1,7 @@
+// Name:      CSIS483 Capstone Project - Asset Tracking
+// Purpose:   Web Application for Asset Tracking
+// Student:    Anthony Gathye
+
 // file that creates a 'user' model for the 'mongoose' plugin
 
 var mongoose = require('mongoose');

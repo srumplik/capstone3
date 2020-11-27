@@ -3,7 +3,8 @@ Purpose: Web Application for Asset Tracking
 Student: Anthony Gathye
 
 # Asset Tracking
-A web application for
+A web application for asset tracking
+
 ### System requirements
 + nodeJS
 	- version 14.15.0

@@ -11,20 +11,20 @@ html
 						i.fa.fa-plus Create
 			tr
 				th _id
-				th Username
-				th Password
 				th First Name
 				th Last Name
+				th Username
+				th Password
 				th edit
 
 			each val in {users}
 				each user in val
 					tr
 						td= user.id
-						td= user.username
-						td= user.password
 						td= user.userFirstName
 						td= user.userLastName
+						td= user.username
+						td= user.password
 						td
 							a(href='/user/one/' + user.id)
 								i.fa.fa-pencil

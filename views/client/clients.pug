@@ -1,0 +1,34 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		table.dbfetch
+			caption.tableHeader Clients
+				a(href='/client/create')
+					button.create.iconButton#user
+						i.fa.fa-plus Create
+			tr
+				th _id
+				th Organization Name
+				th Contact First Name
+				th Contact Last Name
+				th Contact Phone Number
+				th Contact Address
+				th edit
+
+			each val in {clients}
+				each client in val
+					tr
+						td= client.id
+						td= client.orgName
+						td= client.orgContactFirstName
+						td= client.orgContactLastName
+						td= client.orgContactPhoneNumber
+						td= client.orgContactStreetAddress + ' ' +  client.orgContactCity + ' ' +  client.orgContactState + ' ' + client.orgContactZip
+						td
+							a(href='/client/one/' + client.id)
+								i.fa.fa-pencil
+	footer
+		include ../footer.pug

@@ -1,0 +1,42 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		table.dbfetch
+			caption.tableHeader Assets
+				a(href='/asset/create')
+					button.create.iconButton#user
+						i.fa.fa-plus Create
+			tr
+				th _id
+				th Asset ID
+				th Make
+				th Model
+				th Department
+				th Serial Number
+				th Currently Rented
+				th Initial Cost
+				th Rental Price
+				th Times Rented
+				th edit
+
+			each val in {assets}
+				each asset in val
+					tr
+						td= asset.id
+						td= asset.assetID
+						td= asset.make
+						td= asset.model
+						td= asset.department
+						td= asset.serialNumber
+						td= asset.currentlyRented
+						td= '$ ' + asset.initialCost
+						td= '$ ' + asset.rentalPrice
+						td= asset.timesRented
+						td
+							a(href='/asset/one/' + asset.id)
+								i.fa.fa-pencil
+	footer
+		include ../footer.pug

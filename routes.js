@@ -1,3 +1,7 @@
+// Name:      CSIS483 Capstone Project - Asset Tracking
+// Purpose:   Web Application for Asset Tracking
+// Student:    Anthony Gathye
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -85,7 +89,7 @@ router.post('/user/update/:id', function ( req, res ) {  // update user in DB vi
 });
 
 router.get('/user/delete/:id', function ( req, res ) {  // delete user from DB via its _id
-	mongoose.model('User').deleteOne({ '_id': req.params.id}, function(err, result){ // functino to find user document based on '_id' and remove it from 'Users' collection
+	mongoose.model('User').deleteOne({ '_id': req.params.id}, function(err, result){ // function to find user document based on '_id' and remove it from 'Users' collection
 		if(err){
 			res.status(500).send(err);
 		}else
@@ -99,14 +103,22 @@ router.get('/user/delete/:id', function ( req, res ) {  // delete user from DB v
 
 // ROUTES FOR CLIENTS =======================================
 router.get('/client/all', function( req, res ){
-	res.send('List of all clients to come');
+	mongoose.model('Client').find({}, function(err,clients){  // function to return all documents in the 'Clients' collection
+		res.render('./client/clients', {  // renders the 'clients.pug' file
+			clients: clients  // sends the JSON data returned from the DB to the 'clients.pug' file for rendering
+		});
+	});
 }),
 
 
 
 // ROUTES FOR ASSETS =======================================
 router.get('/asset/all', function( req, res ){
-	res.send('List of all assets to come');
+	mongoose.model('Asset').find({}, function(err,assets){  // function to return all documents in the 'Assets' collection
+		res.render('./asset/assets', {  // renders the 'assets.pug' file
+			assets: assets  // sends the JSON data returned from the DB to the 'assets.pug' file for rendering
+		});
+	});
 }),
 
 
