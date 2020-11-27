@@ -1,0 +1,28 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		h2.pageSubTitle
+			Create User
+		div.form
+			form(action = `/user/create` , method = 'POST')
+				div#userName
+					label(for = 'username') Username:
+					br
+					input(name = 'username', placeholder = 'Username')
+				div#password
+					label(for = 'password') Password:
+					br
+					input(name = 'password', placeholder = 'Password')
+				div#userFirstName
+					label(for = 'userFirstName') First Name:
+					br
+					input(name = 'userFirstName', placeholder = 'First Name')
+				div#userLastName
+					label(for = 'userLastName') Last Name:
+					br
+					input(name = 'userLastName', placeholder = 'Last Name')
+				button(type = 'submit') Create
+	footer

@@ -1,0 +1,19 @@
+doctype html
+html
+	head
+		include head.pug
+	body
+		h1#title Asset Tracking
+		form(action = '/login', method = 'POST')#logIn
+			h3#logInTitle Log In
+			div#userName
+				label(for = 'username') Username:
+				br
+				input(name = 'username', placeholder = 'username')
+			div#password
+				label(for = 'password') Password:
+				br
+				input(name = 'password', placeholder = 'password')
+			button(type = 'submit') Sign in
+	footer
+		include footer.pug
