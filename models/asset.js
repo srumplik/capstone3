@@ -21,11 +21,11 @@ const assetSchema = new mongoose.Schema(
 		serialNumber: {
 			type: String,
 		},
-		curentlyRended: {
+		currentlyRented: {
 			type: Boolean,
 		},
 		rentedBy: {
-			type: Array,
+			type: String,
 		},
 		initialCost: {
 			type: Number,

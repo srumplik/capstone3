@@ -14,15 +14,15 @@ html
 				div#password
 					label(for = 'password') Password:
 					br
-					input(name = 'password', value = `${user_password}`)
+					input(name = 'password', value = `${userPassword}`)
 				div#userFirstName
-					label(for = 'firstName') First Name:
+					label(for = 'userFirstName') First Name:
 					br
-					input(name = 'firstname', value = `${userFirstName}`)
+					input(name = 'userFirstName', value = `${userFirstName}`)
 				div#userLastName
-					label(for = 'lastName') Last Name:
+					label(for = 'userLastName') Last Name:
 					br
-					input(name = 'lastName', value = `${userLastName}`)
+					input(name = 'userLastName', value = `${userLastName}`)
 				button(type = 'submit') Update
 			a(href=`/user/delete/${user_id}`)
 				button

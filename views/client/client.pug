@@ -1,0 +1,47 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		h2.pageSubTitle Client: #{client}
+		div.form
+			form(action = `/client/update/${clientID}` , method = 'POST')
+				div#orgName
+					label(for = 'orgName') Organization Name:
+					br
+					input(name = 'orgName', value = `${client}`)
+				div#contactFirstName
+					label(for = 'orgContactFirstName') Contact First Name:
+					br
+					input(name = 'orgContactFirstName', value = `${contactFirstName}`)
+				div#contactLastName
+					label(for = 'orgContactLastName') Contact Last Name:
+					br
+					input(name = 'orgContactLastName', value = `${contactLastName}`)
+				div#contactPhoneNumber
+					label(for = 'orgContactPhoneNumber') Contact Phone Number:
+					br
+					input(name = 'orgContactPhoneNumber', value = `${contactPhoneNumber}`)
+				div#contactStreetAddress
+					label(for = 'orgContactStreetAddress') Contact Street Address:
+					br
+					input(name = 'orgContactStreetAddress', value = `${contactStreetAddress}`)
+				div#contactCity
+					label(for = 'orgContactCity') Contact City:
+					br
+					input(name = 'orgContactCity', value = `${contactCity}`)
+				div#contactState
+					label(for = 'orgContactState') Contact State:
+					br
+					input(name = 'orgContactState', value = `${contactState}`)
+				div#contactZip
+					label(for = 'orgContactZip') Contact Zip Code:
+					br
+					input(name = 'orgContactZip', value = `${contactZip}`)
+				button(type = 'submit') Update
+			a(href=`/client/delete/${clientID}`)
+				button
+					i.fa.fa-trash Remove
+	footer
+		include ../footer.pug

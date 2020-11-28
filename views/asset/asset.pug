@@ -1,0 +1,55 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		h2.pageSubTitle Asset: #{assetID}
+		div.form
+			form(action = `/asset/update/${dbID}` , method = 'POST')
+				div#assetID
+					label(for = 'assetID') Asset ID:
+					br
+					input(name = 'assetID', value = `${assetID}`)
+				div#make
+					label(for = 'make') Make:
+					br
+					input(name = 'make', value = `${make}`)
+				div#model
+					label(for = 'model') Model:
+					br
+					input(name = 'model', value = `${model}`)
+				div#department
+					label(for = 'department') Department:
+					br
+					input(name = 'department', value = `${department}`)
+				div#serialNumber
+					label(for = 'serialNumber') Serial Number:
+					br
+					input(name = 'serialNumber', value = `${serialNumber}`)
+				div#currentlyRented
+					label(for = 'currentlyRented') Currently Rented:
+					br
+					input(name = 'currentlyRented', value = `${currentlyRented}`)
+				div#initialCost
+					label(for = 'initialCost') Initial Cost:
+					br
+					input(name = 'initialCost', value = `${initialCost}`)
+				div#rentalPrice
+					label(for = 'rentalPrice') Rental Price:
+					br
+					input(name = 'rentalPrice', value = `${rentalPrice}`)
+				div#timesRented
+					label(for = 'timesRented') Times Rented:
+					br
+					input(name = 'timesRented', value = `${timesRented}`)
+				div#rentedBy
+					label(for = 'rentedBy') Rented By:
+					br
+					input(name = 'rentedBy', value = `${rentedBy}`)
+				button(type = 'submit') Update
+			a(href=`/asset/delete/${dbID}`)
+				button
+					i.fa.fa-trash Remove
+	footer
+		include ../footer.pug

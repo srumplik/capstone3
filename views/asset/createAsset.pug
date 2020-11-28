@@ -1,0 +1,52 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		h2.pageSubTitle
+			Create Asset
+		div.form
+			form(action = `/asset/create` , method = 'POST')
+				div#assetName
+					label(for = 'assetID') Asset ID:
+					br
+					input(name = 'assetID', placeholder = 'assetID')
+				div#assetMake
+					label(for = 'make') Make:
+					br
+					input(name = 'make', placeholder = 'make')
+				div#assetModel
+					label(for = 'model') Model:
+					br
+					input(name = 'model', placeholder = 'model')
+				div#assetDepartment
+					label(for = 'department') Department:
+					br
+					input(name = 'department', placeholder = 'department')
+				div#assetSerialNumber
+					label(for = 'serialNumber') Serial Number:
+					br
+					input(name = 'serialNumber', placeholder = 'serialNumber')
+				div#assetCurrentlyRented
+					label(for = 'currentlyRented') Currently Rented:
+					br
+					input(type='checkbox' name = 'currentlyRented', placeholder = 'currentlyRented')
+				div#assetInitialCost
+					label(for = 'initialCost') Initial Cost:
+					br
+					input(name = 'initialCost', placeholder = 'initialCost')
+				div#assetRentalPrice
+					label(for = 'rentalPrice') Rental Price:
+					br
+					input(name = 'rentalPrice', placeholder = 'rentalPrice')
+				div#assetTimesRented
+					label(for = 'timesRented') Times Rented:
+					br
+					input(name = 'timesRented', placeholder = 'timesRented')
+				div#assetRentedBy
+					label(for = 'rentedBy') Rented By:
+					br
+					input(name = 'rentedBy', placeholder = 'rentedBy')
+				button(type = 'submit') Create
+	footer

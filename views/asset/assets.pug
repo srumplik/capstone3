@@ -20,6 +20,7 @@ html
 				th Initial Cost
 				th Rental Price
 				th Times Rented
+				th Rented By
 				th edit
 
 			each val in {assets}
@@ -31,12 +32,16 @@ html
 						td= asset.model
 						td= asset.department
 						td= asset.serialNumber
-						td= asset.currentlyRented
-						td= '$ ' + asset.initialCost
-						td= '$ ' + asset.rentalPrice
+						if asset.currentlyRented
+							td Yes
+						else
+							td No
+						td= '$' + asset.initialCost
+						td= '$' + asset.rentalPrice
 						td= asset.timesRented
+						td= asset.rentedBy
 						td
-							a(href='/asset/one/' + asset.id)
+							a(href='/asset/one/' + asset._id)
 								i.fa.fa-pencil
 	footer
 		include ../footer.pug

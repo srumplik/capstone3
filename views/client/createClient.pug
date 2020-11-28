@@ -1,0 +1,44 @@
+doctype html
+html
+	head
+		include ../head.pug
+	body
+		include ../title.pug
+		h2.pageSubTitle
+			Create Client
+		div.form
+			form(action = `/client/create` , method = 'POST')
+				div#orgName
+					label(for = 'orgName') Organization Name:
+					br
+					input(name = 'orgName', placeholder = 'Organization Name')
+				div#orgContactFirstName
+					label(for = 'orgContactFirstName') Organization Contact First Name:
+					br
+					input(name = 'orgContactFirstName', placeholder = 'Contact First Name')
+				div#orgContactLastName
+					label(for = 'orgContactLastName') Organization Contact Last Name:
+					br
+					input(name = 'orgContactLastName', placeholder = 'Contact Last Name')
+				div#orgContactPhoneNumber
+					label(for = 'orgContactPhoneNumber') Organization Contact Phone Number:
+					br
+					input(name = 'orgContactPhoneNumber', placeholder = 'Contact Phone Number')
+				div#orgStreetAddress
+					label(for = 'orgStreetAddress') Organization Street Address:
+					br
+					input(name = 'orgStreetAddress', placeholder = 'Organization Street Address')
+				div#orgCity
+					label(for = 'orgCity') Organization City:
+					br
+					input(name = 'orgCity', placeholder = 'Organization City')
+				div#orgState
+					label(for = 'orgState') Organization State:
+					br
+					input(name = 'orgState', placeholder = 'Organization State')
+				div#orgZip
+					label(for = 'orgZip') Organization Zip:
+					br
+					input(name = 'orgZip', placeholder = 'Organization Zip')
+				button(type = 'submit') Create
+	footer

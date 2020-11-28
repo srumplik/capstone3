@@ -12,10 +12,10 @@ html
 			tr
 				th _id
 				th Organization Name
+				th Organization Address
 				th Contact First Name
 				th Contact Last Name
 				th Contact Phone Number
-				th Contact Address
 				th edit
 
 			each val in {clients}
@@ -23,10 +23,10 @@ html
 					tr
 						td= client.id
 						td= client.orgName
+						td= client.orgContactStreetAddress + ' ' +  client.orgContactCity + ' ' +  client.orgContactState + ' ' + client.orgContactZip
 						td= client.orgContactFirstName
 						td= client.orgContactLastName
 						td= client.orgContactPhoneNumber
-						td= client.orgContactStreetAddress + ' ' +  client.orgContactCity + ' ' +  client.orgContactState + ' ' + client.orgContactZip
 						td
 							a(href='/client/one/' + client.id)
 								i.fa.fa-pencil
