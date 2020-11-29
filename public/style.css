@@ -96,6 +96,12 @@ a{
 	float: right;
 }
 
+.error{
+	text-align: center;
+	color: red;
+	display: inline;
+}
+
 #title{
 	text-align: center;
 }

@@ -15,19 +15,19 @@ router.get('/', function(req,res){ // Server responds to HTTP GET request @ '/' 
 // lOGIC FOR LOGIN PAGE ========================================================
 router.post('/login',function ( req, res ){
 	if (req.body.username == '' || req.body.password == ''){  //  check to see that both boxes have values
-		res.send('Please enter username and password');  // if either box is empty, return error message
+		res.render('./failedLogin', {message: ' Please enter username and password'});  // if either box is empty, return error message
 	}
 	else {  // if boxes are complete, check DB for username & password
 		mongoose.model('User').findOne({'username':req.body.username},function(err,user){  //  function to search database
 			if (err) return handleError (err)  // if error, return error
 			else if (user == null) {  //  if username not in database, return error
-				res.send('Username not in database');
+				res.render('./failedLogin', {message: ' Username not in database'});
 			}
 			else if (user.username == req.body.username && user.password == req.body.password){  //  if username and password are in database, redirect to page for user
 				res.redirect('/user/all');
 			}
 			else {  //  return other errors
-				res.send('Incorrect password');
+				res.render('./failedLogin', {message: ' Incorrect password'});
 			};
 		});
 	};
@@ -47,7 +47,7 @@ router.get('/user/one/:id', function ( req, res ) {  //  display ONE user via it
 	mongoose.model('User').findOne({'_id': req.params.id}, function(err,user){  // function to return one document in the 'Users' colleciton with the '_id' passed in through the URL request
 		if(user == null)  // if the supplied '_id' is not in the 'Users' collection, return an 'error'
 		{
-			res.send('No user in database with that ID');  // sending the 'error'
+			res.render('./error', {message: 'No user in database with that ID'});  // sending the 'error'
 		}else  // render the 'user.pug' file while passing the JSON data through
 		{
 			res.render('./user/user', {
@@ -69,7 +69,7 @@ router.post('/user/create', function ( req, res ) {  // add new user to DB
 	mongoose.model('User').create({username: req.body.username, password: req.body.password, userFirstName: req.body.userFirstName, userLastName: req.body.userLastName}, function(err, result) {  // function to save a new user document to the 'Users' collection
 		if (err){
 			console.log(req.body);
-			res.send(err);
+			res.render('./error', {message: err});
 		} else {
 			res.redirect('/user/all');
 		};
@@ -79,19 +79,19 @@ router.post('/user/create', function ( req, res ) {  // add new user to DB
 router.post('/user/update/:id', function ( req, res ) {  // update user in DB via its _id
 	mongoose.model('User').findOneAndUpdate({ '_id': req.params.id}, req.body, function(err, user){  // function to find a user document that matches the '_id' passed in and update the document values with the newly supplied values
 		if(err){
-			console.log(err);
+			res.render('./error', {message: err});
 		}else
 		{
-			//console.log(user);
+			res.redirect('/user/all');  // once completed, redirect to show all users and including the newly updated user
 		};
 	});
-	res.redirect('/user/all');  // once completed, redirect to show all users and including the newly updated user
+
 });
 
 router.get('/user/delete/:id', function ( req, res ) {  // delete user from DB via its _id
 	mongoose.model('User').deleteOne({ '_id': req.params.id}, function(err, result){ // function to find user document based on '_id' and remove it from 'Users' collection
 		if(err){
-			res.status(500).send(err);
+			res.status(500).render('./error', {message: err});
 		}else
 		{
 			res.redirect('/user/all');  // redirect to show all users
@@ -114,7 +114,7 @@ router.get('/client/one/:id', function ( req, res ) {  //  display ONE client vi
 	mongoose.model('Client').findOne({'_id': req.params.id}, function(err,client){  // function to return one document in the 'Client' colleciton with the '_id' passed in through the URL request
 		if(client == null)  // if the supplied '_id' is not in the 'Client' collection, return an 'error'
 		{
-			res.send('No client in database with that ID');  // sending the 'error'
+			res.render('./error', {message: 'No client in database with that ID'});  // sending the 'error'
 		}else  // render the 'client.pug' file while passing the JSON data through
 		{
 			res.render('./client/client', {
@@ -140,7 +140,7 @@ router.post('/client/create', function ( req, res ) {  // add new client to DB
 	mongoose.model('Client').create({orgName: req.body.orgName, orgContactFirstName: req.body.orgContactFirstName, orgContactLastName: req.body.orgContactLastName, orgContactPhoneNumber: req.body.orgContactPhoneNumber, orgContactStreetAddress: req.body.orgStreetAddress, orgContactCity: req.body.orgCity, orgContactState: req.body.orgState, orgContactZip: req.body.orgZip}, function(err, result) {  // function to save a new client document to the 'Client' collection
 		if (err){
 			console.log(req.body);
-			res.send(err);
+			res.render('./error', {message: err});
 		} else {
 			res.redirect('/client/all');
 		};
@@ -150,19 +150,19 @@ router.post('/client/create', function ( req, res ) {  // add new client to DB
 router.post('/client/update/:id', function ( req, res ) {  // update client in DB via its _id
 	mongoose.model('Client').findOneAndUpdate({ '_id': req.params.id}, req.body, function(err, client){  // function to find a client document that matches the '_id' passed in and update the document values with the newly supplied values
 		if(err){
-			console.log(err);
+			res.render('./error', {message: err});
 		}else
 		{
-			//console.log(client);
+			res.redirect('/client/all');  // once completed, redirect to show all clients and including the newly updated client
 		};
 	});
-	res.redirect('/client/all');  // once completed, redirect to show all clients and including the newly updated client
+
 });
 
 router.get('/client/delete/:id', function ( req, res ) {  // delete client from DB via its _id
 	mongoose.model('Client').deleteOne({ '_id': req.params.id}, function(err, result){ // function to find client document based on '_id' and remove it from 'Clients' collection
 		if(err){
-			res.status(500).send(err);
+			res.status(500).render('./error', {message: err});
 		}else
 		{
 			res.redirect('/client/all');  // redirect to show all clients
@@ -184,7 +184,7 @@ router.get('/asset/one/:id', function ( req, res ) {  //  display ONE asset via 
 	mongoose.model('Asset').findOne({'_id': req.params.id}, function(err,asset){  // function to return one document in the 'Asset' colleciton with the '_id' passed in through the URL request
 		if(asset == null)  // if the supplied '_id' is not in the 'Asset' collection, return an 'error'
 		{
-			res.send('No Asset in database with that ID');  // sending the 'error'
+			res.render('./error', {message: 'No asset in database with that ID'});  // sending the 'error'
 		}else  // render the 'Asset.pug' file while passing the JSON data through
 		{
 			res.render('./asset/asset', {
@@ -213,7 +213,7 @@ router.post('/asset/create', function ( req, res ) {  // add new asset to DB
 		mongoose.model('Asset').create({assetID: req.body.assetID, make: req.body.make, model: req.body.model, department: req.body.department, serialNumber: req.body.serialNumber, currentlyRented: true, initialCost: req.body.initialCost, rentalPrice: req.body.rentalPrice, timesRented: req.body.timesRented, rentedBy: req.body.rentedBy}, function(err, result) {  // function to save a new asset document to the 'Asset' collection
 			if (err){
 				console.log(req.body);
-				res.send(err);
+				res.render('./error', {message: err});
 			} else {
 				res.redirect('/asset/all');
 			};
@@ -222,7 +222,7 @@ router.post('/asset/create', function ( req, res ) {  // add new asset to DB
 		mongoose.model('Asset').create({assetID: req.body.assetID, make: req.body.make, model: req.body.model, department: req.body.department, serialNumber: req.body.serialNumber, currentlyRented: false, initialCost: req.body.initialCost, rentalPrice: req.body.rentalPrice, timesRented: req.body.timesRented, rentedBy: req.body.rentedBy}, function(err, result) {  // function to save a new asset document to the 'Asset' collection
 			if (err){
 				console.log(req.body);
-				res.send(err);
+				res.render('./error', {message: err});
 			} else {
 				res.redirect('/asset/all');
 			};
@@ -233,19 +233,18 @@ router.post('/asset/create', function ( req, res ) {  // add new asset to DB
 router.post('/asset/update/:id', function ( req, res ) {  // update asset in DB via its _id
 	mongoose.model('Asset').findOneAndUpdate({ '_id': req.params.id}, req.body, function(err, asset){  // function to find a user document that matches the '_id' passed in and update the document values with the newly supplied values
 		if(err){
-			console.log(err);
+			res.render('./error', {message: err});
 		}else
 		{
-			//console.log(asset);
+			res.redirect('/asset/all');  // once completed, redirect to show all asset and including the newly updated asset
 		};
 	});
-	res.redirect('/asset/all');  // once completed, redirect to show all asset and including the newly updated asset
 });
 
 router.get('/asset/delete/:id', function ( req, res ) {  // delete asset from DB via its _id
 	mongoose.model('Asset').deleteOne({ '_id': req.params.id}, function(err, result){ // function to find asset document based on '_id' and remove it from 'Asset' collection
 		if(err){
-			res.status(500).send(err);
+			res.status(500).render('./error', {message: err});
 		}else
 		{
 			res.redirect('/asset/all');  // redirect to show all asset
